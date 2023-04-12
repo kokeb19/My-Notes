@@ -34,7 +34,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Page"),
+        title: const Text("Login"),
       ),
       body: Column(
         children: [
@@ -78,7 +78,12 @@ class _LoginViewState extends State<LoginView> {
               },
               child: const Text("Login")),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                '/register/',
+                (route) => false,
+              );
+            },
             child: const Text("Not registered yet? Registeer here!"),
           )
         ],
