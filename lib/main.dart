@@ -19,6 +19,7 @@ void main() {
       routes: {
         '/login/': (context) => const LoginView(),
         '/register/': (context) => const RegisterView(),
+        '/notes/': (context) => const NotesView(),
       },
     ),
   );
@@ -79,8 +80,18 @@ class _NotesViewState extends State<NotesView> {
         title: const Text("Main UI"),
         actions: [
           PopupMenuButton<MenuAction>(
-            onSelected: (value) {
-              devtools.log(value.toString());
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/login/',
+                      (_) => false,
+                    );
+                  }
+              }
             },
             itemBuilder: (context) {
               return const [
