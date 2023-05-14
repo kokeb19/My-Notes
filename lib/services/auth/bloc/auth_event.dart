@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:mynotes/services/auth/bloc/auth_state.dart';
 
 @immutable
 abstract class AuthEvent {
@@ -10,16 +9,13 @@ class AuthEventInitialize extends AuthEvent {
   const AuthEventInitialize();
 }
 
-// class AuthStateRegistering extends AuthState {
-//   final Exception? exception;
-
-//   const AuthStateRegistering(
-//     this.exception,
-//   );
-// }
-
 class AuthEventSendEmailVerification extends AuthEvent {
   const AuthEventSendEmailVerification();
+}
+
+class AuthEventForgotPassword extends AuthEvent {
+  final String? email;
+  const AuthEventForgotPassword({this.email});
 }
 
 class AuthEventLogin extends AuthEvent {

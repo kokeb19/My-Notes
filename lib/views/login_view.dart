@@ -38,14 +38,6 @@ class _LoginViewState extends State<LoginView> {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
           if (state is AuthStateLoggedOut) {
-            final CloseDialog = _closeDialogHandle;
-            if (!state.isLoading && CloseDialog != null) {
-              CloseDialog();
-              _closeDialogHandle = null;
-            } else if (state.isLoading && CloseDialog == null) {
-              _closeDialogHandle =
-                  showLoadingDialog(context: context, text: "loading ...");
-            }
             if (state.exception is UserNotFoundAuthException) {
               await showErrorDialog(context, "user not found");
             } else if (state.exception is WrongPasswordAuthException) {
